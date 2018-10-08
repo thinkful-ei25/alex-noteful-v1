@@ -5,4 +5,13 @@ const data = require('./db/notes');
 
 console.log('Hello Noteful!');
 
-// INSERT EXPRESS APP CODE HERE...
+const express = require('express');
+const app = express();
+
+app.use(express.static('public'));
+
+app.listen(8080, () => {
+  console.info(`Server listening on 8080`);
+}).on('error', err => {
+  console.error(err);
+});
