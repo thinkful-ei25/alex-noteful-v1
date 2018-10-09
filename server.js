@@ -2,6 +2,7 @@
 
 // Load array of notes
 const data = require('./db/notes');
+const { PORT } = require('./middleware/config');
 
 console.log('Hello Noteful!');
 
@@ -24,7 +25,7 @@ app.get('/api/notes/:id', (req, res) =>{
   res.json(data.find(item => item.id === id));
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
   console.info(`Server listening on 8080`);
 }).on('error', err => {
   console.error(err);
