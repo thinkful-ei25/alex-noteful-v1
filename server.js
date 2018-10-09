@@ -3,15 +3,17 @@
 // Load array of notes
 const data = require('./db/notes');
 const { PORT } = require('./middleware/config');
+const { requestLogger } = require('./middleware/logger');
 
 console.log('Hello Noteful!');
 
 const express = require('express');
 const app = express();
 
+app.use(requestLogger);
 app.use(express.static('public'));
 
-app.get('/api/notes/?', (req, res) => {
+app.get('/api/notes/?',  (req, res) => {
   let list = data;
   let searchTerm = req.query.searchTerm;
   if (searchTerm) {
