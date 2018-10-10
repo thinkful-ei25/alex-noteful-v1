@@ -6,14 +6,15 @@ const simDB = require('./db/simDB');
 const notes = simDB.initialize(data);
 
 const { PORT } = require('./middleware/config');
-const { requestLogger } = require('./middleware/logger');
 
 console.log('Hello Noteful!');
 
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 
-app.use(requestLogger);
+
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(express.json());
 
@@ -80,7 +81,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(PORT, () => {
-  console.info(`Server listening on 8080`);
+  console.info('Server listening on 8080');
 }).on('error', err => {
   console.error(err);
 });
