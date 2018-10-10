@@ -90,8 +90,7 @@ const noteful = (function () {
     $('.js-start-new-note-form').on('submit', event => {
       event.preventDefault();
 
-      store.currentNote = {};
-      render();
+      console.log('Start New Note, coming soon...');
 
     });
   }
