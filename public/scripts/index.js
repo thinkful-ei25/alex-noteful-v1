@@ -6,13 +6,8 @@ $(document).ready(function () {
 
   api.search({}) 
     .then(response => {
-      if (response) {
-        store.notes = response;
-        noteful.render(); 
-      }
-    })
-    .catch(err => {
-      console.err(err);
+      store.notes = response;
+      noteful.render(); 
     });
 
 });

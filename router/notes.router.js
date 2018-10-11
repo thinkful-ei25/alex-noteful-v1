@@ -11,11 +11,7 @@ router.get('/',  (req, res, next) => {
 
   notes.filter(searchTerm)
     .then(list =>{
-      if(list) {
-        res.json(list);
-      } else {
-        next();
-      }
+      res.json(list);
     })
     .catch(err => {
       next(err);
@@ -80,8 +76,6 @@ router.post('/', (req, res, next) => {
     .then(item => {
       if (item){
         res.location(`http://${req.headers.host}/notes/${item.id}`).status(201).json(item); 
-      } else {
-        next();
       }
     })
     .catch(err => {
@@ -90,20 +84,14 @@ router.post('/', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  const { id }  = req.params;
+  const id   = req.params.id;
   
-  notes.delete(id)
-    .then(item => {
-      if (item) {
-        res.sendStatus(204);
-      } else {
-        next();
-      }
-    })
-    .catch(err => {
-      next(err);
-    });
-
+  notes.delete(id, err => {
+    if (err) {
+      return next(err);
+    }
+    res.sendStatus(204);
+  });
 });
 
 module.exports = router;

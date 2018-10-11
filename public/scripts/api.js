@@ -8,7 +8,7 @@ const api = {
       type: 'GET',
       url: '/api/notes/',
       dataType: 'json',
-      data: query,
+      data: query
     });
   },
 
